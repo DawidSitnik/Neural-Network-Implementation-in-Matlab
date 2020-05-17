@@ -15,9 +15,7 @@ The training process relies on callculating gradient of loss function (which is 
   <img src = "https://imgur.com/8ylBwIl.png"/>
 </p> 
 
-W - set of all the weights
-
-n - learning rate
+W - set of all the weights, n - learning rate
 
 To obtain referencial efficiency of the network, the model was trained during 100 epochs, for 100 hidden layers and for n = 0.001. An error after each epoch can be seen at the plot below. 
 
@@ -26,5 +24,24 @@ To obtain referencial efficiency of the network, the model was trained during 10
 </p> 
 
 What we can gather from the picture is that an error of the testing set slightly continously dimishes. It means that teoretically the networ could be trained even better. Whats more, the overfitting doesn't bring a huge difference between training and testing set, so the architecture of the network could also be more complex, which would potentially affect the result in a positive way. 
+
+*Total Error:*
+- training dataset: 
+- testing dataset: 
+
+## Modified Version of the ANN
+The next part of the excercise is to implement some refinements basing on Yann LeCun article named 'Efficient Backprop'.
+
+### Floating Learning Rate
+Learning rate describes how fast does the neural network learns, so the bigger it is, the network learns faster. The downside of setting learning rate to bigger values is that the model will not notice local minimum and bypass it. To fix it to the optimal value, LeCun proposes to make it dependent on the length of the learning process. So at the beggining the learning rate should be relatively big and its value should deminish by the time. 
+
+To implement this idea the learning rate was subordinate to the total error of the network in the linear relation. To get the solution which is more accurate than the referential one, the initial learning rate (assuming that an first error value is 0.9) was set to 0.005 and decreases to 0.0005 during the learning process.
+
+The formula which is used for fixing the learning rate is:
+learning_rate = 0.0005 + (0.005 − 0.0005)(error − 0.01)/(0.9 − 0.1)
+
+### Data Normalization
+Another modification proposed in the article
+
 
 
