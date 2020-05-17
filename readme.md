@@ -40,8 +40,21 @@ To implement this idea the learning rate was subordinate to the total error of t
 The formula which is used for fixing the learning rate is:
 learning_rate = 0.0005 + (0.005 − 0.0005)(error − 0.01)/(0.9 − 0.1)
 
-### Data Normalization
-Another modification proposed in the article
+### Including Inertia
+While learning process with the constant gradient value and its direction (pointing to the local minimum) and without floating learning rate, the network does steps of the constant value. The article suggest to include inertia in the learning process, so that the gradient with the constant direction will increase the speed of weights modification. 
 
+The formula for the inertia can be described as follows:
+<p align="center">
+  <img src = "https://imgur.com/oeNUzcT.png"/>
+</p> 
 
+### Unused Modifications
+Another modification which were tried, but resulted in worse output was input normalization and modification of demanded values. 
 
+#### Demanded Values Modification
+According to the article, the optimal output value is the value, for which the second derivative of the activation function is the greatest. It enables the best usage of non-linear structure and prevent saturation of the values. 
+
+Saturation of the values is an unwanted phenomenon based on pursuting output values to the asymptotic values. Because of that, the values of the weights goes to infinity, slowing learning process. 
+
+#### Input Normalization
+The way of normalization proposed in the article was to modiffy the data in the way in which their mean equals to 0. The standard deviation of the samples should be similar to avoid a domination of one sample in the dataset. In the case of given data, the standard deviation was simillar among the samples, so the only modification which was testes was subducting the mean value of the pixels of the training dataset. 
