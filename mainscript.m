@@ -1,40 +1,49 @@
 # rand seed was always set to this value while experiments
 rand("state", "reset");
-rand("seed", 0);
+rand("seed", 1);
 
 [tvec tlab tstv tstl] = readSets();
 
-load tiny.txt
-tlab = tiny(:,1);
-tvec = tiny(:,2:end);
+tlab = tlab+1;
+tstl = tstl+1;
 
-[hlnn olnn] = crann(columns(tvec), 100, 3);
+[hlnn olnn] = crann(columns(tvec), 100, 10);
 
-n_epochs = 100;
-errors_in_epochs = []
+n_epochs = 400;
+errors_in_epochs_training = [];
+errors_in_epochs_testing = [];
 
-error = 0.9
-desired_error= 0
+desired_error= 0.1258;
 
 for epoch = 1:n_epochs
 
   [hlnn olnn terr] = backprop(tvec, tlab, hlnn, olnn, 0.001);
   
+  % error callculation for training dataset
   clsRes = anncls(tvec, hlnn, olnn);
   error = sum(clsRes!=tlab)/size(tlab,1);
+  errors_in_epochs_training(end+1) = error;
 
-  errors_in_epochs(end+1) = error;
+  % error callculation for testing dataset
+  clsRes_test = anncls(tstv, hlnn, olnn);
+  error_test = sum(clsRes_test!=tstl)/size(tstl,1);
+  errors_in_epochs_testing(end+1) = error_test;
 
   % stop after getting satisfying error
-  if error <= desired_error
+  if error_test <= desired_error
     break
   end
 end
-
-plot(errors_in_epochs)
+clc
+plot(errors_in_epochs_training)
+hold on
+plot(errors_in_epochs_testing)
+title('Training and Testing Error During Backprop')
+legend('training','testing')
+hold off
  
-file_name = strcat('./workspaces/workspace_', datestr(date))
-save(file_name)
+%file_name = strcat('./workspaces/workspace_', datestr(date));
+%save(file_name);
 
 display("result for training data:")
 clsRes_train = anncls(tvec, hlnn, olnn);
