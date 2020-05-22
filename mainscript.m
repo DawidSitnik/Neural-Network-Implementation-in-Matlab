@@ -9,11 +9,11 @@ tstl = tstl+1;
 
 [hlnn olnn] = crann(columns(tvec), 100, 10);
 
-n_epochs = 400;
+n_epochs = 200;
 errors_in_epochs_training = [];
 errors_in_epochs_testing = [];
 
-desired_error= 0.1258;
+desired_error= 0.00;
 
 for epoch = 1:n_epochs
 

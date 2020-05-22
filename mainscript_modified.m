@@ -7,13 +7,13 @@ rand("seed", 1);
 tlab = tlab+1;
 tstl = tstl+1;
 
-[hlnn olnn] = crann(columns(tvec), 200, 10);
+[hlnn olnn] = crann(columns(tvec), 150, 10);
 
-n_epochs = 150;
+n_epochs = 200;
 errors_in_epochs_training = [];
 errors_in_epochs_testing = [];
 
-desired_error= 0.1258;
+desired_error= 0.00;
 
 for epoch = 1:n_epochs
 

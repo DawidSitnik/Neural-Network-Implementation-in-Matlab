@@ -1,4 +1,4 @@
-function [hidlw outlw terr] = backprop(tset, tslb, inihidlw, inioutlw, lr)
+function [hidlw outlw terr] = backprop_modified(tset, tslb, inihidlw, inioutlw, lr)
 % derivative of sigmoid activation function
 % tset - training set (every row represents a sample)
 % tslb - column vector of labels 
